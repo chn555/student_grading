@@ -1,0 +1,24 @@
+So here is team exercise.:
+You have to manage a data structure for managing data for School ( with
+students and grades)
+1. Write a program that present a menu to the user with the following options
+And receive from the user a chosen option :
+A – Add Student
+IF the user will press “A” he will be asked to provide a name and an ID for the
+student. The students data will be saved.
+B – Delete Student
+IF the user will press “B” he will be asked to provide a an ID for the student. This
+student and his data will be deleted
+C – Add Grade to Student
+IF the user will press “C” he will be asked to provide a an ID and a grade. This
+grade will be saved for this student
+D – Calculate Student Avg
+IF the user will press “D” he will be asked to provide a an ID . The program will
+print that Student Avg.
+E. Find Max
+F the user will press “E” , the program will prints the Students data with the
+Maximum average.
+F. Replace Grades
+F the user will press “F” , he will be asked to provide two students IDs and
+replace their grades with each other
+G. Exit the program
