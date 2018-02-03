@@ -7,3 +7,6 @@ sarr=($id $name)
 # saves the array to a file, named after the student id
 echo ${sarr[*]} >> students.txt
 }
+
+
+add_student

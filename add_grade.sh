@@ -14,3 +14,5 @@ echo ${megaarray[*]}
 # takes the line of newarray and switch with megaarray
 #sed "s/$newarray/$megaarray/" students.txt
 }
+
+add_grade

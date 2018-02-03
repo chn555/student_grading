@@ -9,3 +9,6 @@ for v in ${a[@]} ; do
 done
 echo $max
 }
+
+
+student_mavg

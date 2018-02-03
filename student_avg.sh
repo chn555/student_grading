@@ -14,3 +14,6 @@ done
 avg=$( expr $newarraysum / $count)
 echo $avg
 }
+
+
+student_avg
