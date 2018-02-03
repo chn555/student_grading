@@ -26,7 +26,7 @@ read -p "Enter grade to be added : " grade
 megaarray=($newarray $grade)
 echo ${megaarray[*]}
 # takes the line of newarray and switch with megaarray
-sed "s/^$newarray$/^$megaarray$/" students.txt
+#sed "s/$newarray/$megaarray/" students.txt
 }
 
 
@@ -34,7 +34,7 @@ sed "s/^$newarray$/^$megaarray$/" students.txt
 remove_student ()
 {
 read -p "Enter student ID : " id
-sed "/$id*//d" students.txt
+sed "/$id*/d" students.txt
 }
 
 student_avg ()
