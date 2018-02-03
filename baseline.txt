@@ -1,0 +1,13 @@
+
+every student has a file
+data is saved as
+"id" "name" "grade1" "grade2"
+
+to create array from file use :
+
+read -p "Enter student ID : " id
+readarray -a [array-name] < $id.student
+
+to save array use :
+
+echo ${array[*]} > $id.student
