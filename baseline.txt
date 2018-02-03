@@ -11,3 +11,10 @@ readarray -a [array-name] < $id.student
 to save array use :
 
 echo ${array[*]} > $id.student
+
+
+jobs :
+
+dor : remove_student & menu
+tom : student_avg & QA
+chn : student_mavg
