@@ -1,13 +1,29 @@
 student_mavg ()
 {
-read -p "Enter student ID : " id
-read -a sarr < $id
-max=0
-for v in ${a[@]} ; do
-    if (( $v > $max ));
-      then max=$v; fi
+
+files=*.student
+mavrg=0
+mavrgstudent="no one"
+
+for f in $files; do
+  readarray -a sarr < $f
+  maxcount=${#sarr[*]}
+  echo $maxcount
+  tmpmavg=0
+  for i in {2..$maxcount}; do
+    tmpmavg=$(expr $tmpmavg + ${sarr[$i]})
+    if [[ $tmpmavg -gt $mavrg ]]
+    then
+      mavrg=$tmpmavg
+      mavrgstudent=$f
+    else
+      continue
+    fi
+  done
 done
-echo $max
+
+echo "The best student was $mavrgstudent with $mavrg points avarage"
+
 }
 
 
