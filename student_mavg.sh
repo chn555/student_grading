@@ -6,7 +6,7 @@ mavrg=0
 mavrgstudent="no one"
 
 for f in $files; do
-  readarray -a sarr < $f
+  read -a   sarr < $f
   maxcount=${#sarr[*]}
   echo $maxcount
   tmpmavg=0
