@@ -8,7 +8,7 @@ mavrgstudent="no one"
 for f in $files; do
   read -a   sarr < $f
   maxcount=${#sarr[*]}
-  echo $maxcount
+ maxcount=$( expr $maxcount - 2 )
   tmpmavg=0
   for i in {2..$maxcount}; do
     tmpmavg=$(expr $tmpmavg + ${sarr[$i]})
