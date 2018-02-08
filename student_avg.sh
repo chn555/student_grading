@@ -1,18 +1,33 @@
 student_avg ()
 {
-read -p "Enter student ID : " id
-# opens file into array
-newarray=$(cat students.txt |grep ^$id)
-# prints all elements after 2. 0 and 1 are name and id
-echo ${newarray[@]:2}
-${#newarray[*]} = sarrcount
-newarraysum=0
-for $i in 2..$newarraycount; do
-  newarraysum=$( expr ${newarray[$i]} + $newarraysum)
-  count= $(expr $count + 1 )
-done
-avg=$( expr $newarraysum / $count)
-echo $avg
+
+
+
+
+  read -p "Enter student ID : " id
+  # opens the file into an array called sarr
+  # read -a sarr < $id
+  read -a  sarr < $id.student
+
+maxcount=${#sarr[*]}
+elenumber=$( expr $maxcount - 2 )
+declare -x avg=0
+  if [[ $maxcount -le 1 ]]
+  then
+    continue
+  elif [[ $maxcount -eq 2 ]]
+  then
+    avg=${sarr[2]}
+  else
+    #  for i in $(eval echo {2..$( expr $maxcount - 1 )}); do
+    for i in ${sarr[@]:2} ;do
+      sum=$(expr $sum + ${sarr[$i]})
+    done
+    TurboAnalIsisAVG=$(expr $sum / $elenumber )
+  fi
+
+  echo "The best student was ${sarr[1]} with $TurboAnalIsisAVG points avarage"
+
 }
 
 
