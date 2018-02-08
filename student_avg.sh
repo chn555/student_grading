@@ -21,7 +21,7 @@ declare -x avg=0
   else
     #  for i in $(eval echo {2..$( expr $maxcount - 1 )}); do
     for i in ${sarr[@]:2} ;do
-      sum=$(expr $sum + ${sarr[$i]})
+      sum=$(expr $sum + $i)
     done
     TurboAnalIsisAVG=$(expr $sum / $elenumber )
   fi

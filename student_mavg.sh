@@ -8,7 +8,7 @@ mavrgstudent="no one"
 for f in $files; do
   read -a   sarr < $f
   maxcount=${#sarr[*]}
- maxcount=$( expr $maxcount - 2 )
+
   tmpmavg=0
   if [[ $maxcount -le 1 ]]
   then
@@ -24,10 +24,10 @@ for f in $files; do
       continue
     fi
   else
-    for i in $(eval echo {2..$( expr $maxcount - 1 )}); do
-      tmpmavg=$(expr $tmpmavg + ${sarr[$i]})
+    for i in ${sarr[@]:2} ;do
+      tmpsum=$(expr $tmpsum + $i)
     done
-    tmpmavg=$(expr $tmpmavg / $(expr $maxcount - 2))
+    tmpmavg=$(expr $tmpsum / $(expr $maxcount - 2))
     if [[ $tmpmavg -gt $mavrg ]]
     then
       mavrg=$tmpmavg
@@ -38,7 +38,7 @@ for f in $files; do
   fi
 done
 
-echo "The best student was $mavrgstudent with $mavrg points avarage"
+echo "The best student was ${sarr[1]} with $mavrg points avarage"
 
 }
 
