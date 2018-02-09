@@ -1,9 +1,8 @@
 add_grade()
 {
 
-#read -p "Enter student ID : " id
-# opens the file into an array called sarr
-# read -a sarr < $id
+
+# inputs the file to the array
 read -a  sarr < "$opt"
 
 # printts the array
@@ -28,10 +27,12 @@ echo ${sarr[*]}
 
 menu()
 {
-
+# files lists all student files in the folder
   files=(*.student)
+
   declare -a names
 
+# adds all student file names to array
   for f in $files; do
     names+=$f
   done
@@ -45,7 +46,6 @@ echo Select student
         echo $ops
         add_grade
         break
-        # processing
         ;;
       "Stop the script")
         echo "You chose to stop"

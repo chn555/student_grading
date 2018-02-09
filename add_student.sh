@@ -1,12 +1,25 @@
 add_student ()
 {
-read -p "Enter student ID : " id
-read -p "Enter student name : " name
-# creates an array with student name and in
-sarr=($id $name)
-# saves the array to a file, named after the student id
-echo ${sarr[*]} > $id.student
-echo "Student $name created"
+
+  read -p "Enter student ID : " id
+
+  #TODO add validation for id, name and duplicates
+
+  until [[ $id =~ ^[0-9]{3}$ ]] ;do
+    read -p "Invalid ID number, please try again : " id
+  done
+
+  read -p "Enter student name : " name
+
+  until [[ $name =~ ^[a-Z]{,9}$ ]] ;do
+    read -p "Name is too long or containes invalid characters: " name
+  done
+    # creates an array with student name and in
+    sarr=($id $name)
+    # saves the array to a file, named after the student id
+    echo ${sarr[*]} > students/$id.student
+    echo "Student $name created"
+
 }
 
 
