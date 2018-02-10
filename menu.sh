@@ -37,6 +37,6 @@ select func in "Add a student" "Delete a student" "Add a grade to an existing st
 		*)
 			echo "Please enter a valid selection"
 		;;
-	esac2
+	esac
 
 done
