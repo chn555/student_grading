@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#Creator : DorShamay
+#Creator : fuck a you DorShamay
 #Purpose : Make a menu to StudentGrading functions
 #Version 0.0.1 06/02/18
 mainmenu()
