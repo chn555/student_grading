@@ -51,3 +51,5 @@ echo Select student
 
 
 }
+add_grade
+Sub_Menu_Add_Grade
