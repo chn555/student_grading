@@ -22,12 +22,7 @@ fi
 Sub_Menu_Add_Grade ()
 {
 # files lists all student files in the folder
-<<<<<<< HEAD
-  files=(students/*.student)
-=======
   files=(students/*.students)
->>>>>>> 7d35c6edb52043ef8769f562c7afe306e2e05fbc
-
   declare -a names
 
 # adds all student file names to array
@@ -55,8 +50,4 @@ echo Select student
 
 }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> d5359c89042d50626ef0242f42259845df351723
 Sub_Menu_Add_Grade
