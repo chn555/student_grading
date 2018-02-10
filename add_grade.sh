@@ -42,7 +42,6 @@ echo Select student
     case $opt in
       *.student)
         echo "Student file $opt selected"
-        echo $opt
         add_grade
         break
         ;;
