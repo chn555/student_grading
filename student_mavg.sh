@@ -1,19 +1,19 @@
 student_mavg ()
 {
 
-files=*.student
+files=student/*.student
 mavrg=0
 mavrgstudent="no one"
 
 for f in $files; do
-  read -a   sarr < $f
+  read -a sarr < $f
   maxcount=${#sarr[*]}
 
   tmpmavg=0
-  if [[ $maxcount -le 1 ]]
+  if [[ $maxcount -le 2 ]]
   then
     continue
-  elif [[ $maxcount -eq 2 ]]
+  elif [[ $maxcount -eq 3 ]]
   then
     tmpmavg=${sarr[2]}
     if [[ $tmpmavg -gt $mavrg ]]

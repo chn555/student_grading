@@ -7,7 +7,7 @@ student_avg ()
 maxcount=${#sarr[*]}
 elenumber=$( expr $maxcount - 2 )
 declare -x avg=0
-  if [[ $maxcount -le 1 ]]
+  if [[ $maxcount -le 2 ]]
   then
     continue
   elif [[ $maxcount -eq 2 ]]
@@ -21,6 +21,8 @@ declare -x avg=0
     TurboAnalIsisAVG=$(expr $sum / $elenumber )
   fi
 
-  echo "The best student was ${sarr[1]} with $TurboAnalIsisAVG points avarage"
+  echo "The avarage of student ${sarr[1]} is $TurboAnalIsisAVG points"
 
 }
+
+student_avg
