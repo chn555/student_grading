@@ -7,7 +7,7 @@ student_avg ()
 maxcount=${#sarr[*]}
 elenumber=$( expr $maxcount - 2 )
 declare -x avg=0
-  if [[ $maxcount -le 2 ]]
+  if [[ $maxcount -le 1 ]]
   then
     continue
   elif [[ $maxcount -eq 2 ]]
@@ -21,8 +21,44 @@ declare -x avg=0
     TurboAnalIsisAVG=$(expr $sum / $elenumber )
   fi
 
-  echo "The avarage of student ${sarr[1]} is $TurboAnalIsisAVG points"
+  echo "The avarage of student ${sarr[1]} is $TurboAnalIsisAVG points."
 
 }
 
-student_avg
+menu()
+{
+# files lists all student files in the folder
+  files=(students/*.student)
+
+  declare -a names
+
+# adds all student file names to array
+  for f in $files; do
+    names+=$f
+  done
+
+echo Select student
+    select opt in "${names[@]}" "Stop the script"; do
+    case $opt in
+      *.student)
+        echo "Student file $opt selected"
+        #sid=$opt
+        #echo $opt
+        student_avg
+        break
+        ;;
+      "Stop the script")
+        echo "You chose to stop"
+        break
+        ;;
+      *)
+        echo "This is not a number"
+        ;;
+    esac
+  done
+
+
+}
+
+
+menu

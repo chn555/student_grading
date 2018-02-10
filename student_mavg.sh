@@ -1,7 +1,7 @@
 student_mavg ()
 {
 
-files=student/*.student
+files=students/*.student
 mavrg=0
 mavrgstudent="no one"
 

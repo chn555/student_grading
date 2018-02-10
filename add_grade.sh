@@ -22,7 +22,7 @@ fi
 Sub_Menu_Add_Grade ()
 {
 # files lists all student files in the folder
-  files=(student/*.student)
+  files=(students/*.student)
 
   declare -a names
 
