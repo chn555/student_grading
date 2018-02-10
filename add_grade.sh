@@ -11,7 +11,7 @@ read -p "Enter grade to be added : " grade
 if [[ $grade =~ [0-9]{1,3} ]]; then
 
   sarr+=("$grade")
-  echo ${sarr[*]} > $opt
+  echo ${sarr[*]} > "students/$opt"
   echo "Grade $grade added "
 else
   echo Grade is invalid, exiting and Fuck-a-you
