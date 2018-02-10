@@ -42,8 +42,7 @@ echo Select student
     case $opt in
       *.student)
         echo "Student file $opt selected"
-        id=$ops
-        echo $ops
+        echo $opt
         add_grade
         break
         ;;
