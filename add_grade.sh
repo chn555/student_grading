@@ -17,15 +17,9 @@ else
   echo Grade is invalid, exiting
 fi
 
-
-echo ${#sarr[*]}
-echo ${sarr[*]}
-
-
-
 }
 
-menu()
+Sub_Menu_Add_Grade ()
 {
 # files lists all student files in the folder
   files=(*.student)
