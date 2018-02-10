@@ -2,7 +2,7 @@ student_avg ()
 {
   # opens the file into an array called sarr
   # read -a sarr < $id
-  read -a  sarr < "$opt"
+  read -a  sarr < "students/$opt"
 
 maxcount=${#sarr[*]}
 elenumber=$( expr $maxcount - 2 )

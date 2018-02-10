@@ -3,7 +3,7 @@ add_grade()
 
 
 # inputs the file to the array
-read -a sarr < "$opt"
+read -a sarr < "students/$opt"
 
 # printts the array
 # echo ${sarr[*]}
