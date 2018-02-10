@@ -1,10 +1,5 @@
 student_avg ()
 {
-
-
-
-
-
   # opens the file into an array called sarr
   # read -a sarr < $id
   read -a  sarr < "$opt"
@@ -29,41 +24,3 @@ declare -x avg=0
   echo "The best student was ${sarr[1]} with $TurboAnalIsisAVG points avarage"
 
 }
-
-menu()
-{
-# files lists all student files in the folder
-  files=(*.student)
-
-  declare -a names
-
-# adds all student file names to array
-  for f in $files; do
-    names+=$f
-  done
-
-echo Select student
-    select opt in "${names[@]}" "Stop the script"; do
-    case $opt in
-      *.student)
-        echo "Student file $opt selected"
-        id=$ops
-        echo $ops
-        student_avg
-        break
-        ;;
-      "Stop the script")
-        echo "You chose to stop"
-        break
-        ;;
-      *)
-        echo "This is not a number"
-        ;;
-    esac
-  done
-
-
-}
-
-
-menu
