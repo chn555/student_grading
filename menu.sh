@@ -7,7 +7,7 @@
 
 echo "Which Function would you like to use?"
 
-select func in "Add a student" "Delete a student" "Add a grade to an existing student" "Show avarage of a student" "Show the student with the highest avarage" "Replace the grades of two students with each other"
+select func in "Add a student" "Delete a student" "Add a grade to an existing student" "Show avarage of a student" "Show the student with the highest avarage" "Replace the grades of two students with each other" "Quit"
     do
   	 case $func in
 		"Add a student" | "add_student")
@@ -34,6 +34,9 @@ select func in "Add a student" "Delete a student" "Add a grade to an existing st
       replace_student
       mainmenu
 		       ;;
+    "Quit" | "q")
+      exit 0
+          ;;
 		*)
 			echo "Please enter a valid selection"
 		;;
