@@ -51,5 +51,9 @@ echo Select student
 
 
 }
+<<<<<<< HEAD
 
+=======
+add_grade
+>>>>>>> f1431657ad84e3a47127db523b237f04d54fd307
 Sub_Menu_Add_Grade
