@@ -16,7 +16,7 @@ replace_students ()
   cat students/$student_one
   cat students/$student_two
 
-  echo "Successed"
+  echo "Succeeded"
   exit
 }
 
