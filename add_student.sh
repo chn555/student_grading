@@ -6,7 +6,7 @@ add_student ()
   #TODO add validation for id, name and duplicates
 
   until [[ $sid =~ ^[0-9]{3}$ ]] ;do
-    read -p "Invalid ID number, please try again : " id
+    read -p "Invalid ID number, please try again : " sid
   done
 
   read -p "Enter student name : " name

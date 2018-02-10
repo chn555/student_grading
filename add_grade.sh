@@ -3,10 +3,10 @@ add_grade()
 
 
 # inputs the file to the array
-read -a  sarr < "$opt"
+read -a sarr < "$opt"
 
 # printts the array
-echo ${sarr[*]}
+# echo ${sarr[*]}
 read -p "Enter grade to be added : " grade
 if [[ $grade =~ [0-9]{1,3} ]]; then
 
@@ -14,7 +14,7 @@ if [[ $grade =~ [0-9]{1,3} ]]; then
   echo ${sarr[*]} > $opt
   echo "Grade $grade added "
 else
-  echo Grade is invalid, exiting
+  echo Grade is invalid, exiting and Fuck-a-you
 fi
 
 }
@@ -22,7 +22,7 @@ fi
 Sub_Menu_Add_Grade ()
 {
 # files lists all student files in the folder
-  files=(*.student)
+  files=(student/*.student)
 
   declare -a names
 
