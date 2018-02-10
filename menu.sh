@@ -3,9 +3,11 @@
 #Creator : DorShamay
 #Purpose : Make a menu to StudentGrading functions
 #Version 0.0.1 06/02/18
-
+mainmenu()
+{
 
 echo "Which Function would you like to use?"
+
 
 select func in "Add a student" "Delete a student" "Add a grade to an existing student" "Show avarage of a student" "Show the student with the highest avarage" "Replace the grades of two students with each other" "Quit"
     do
@@ -43,3 +45,6 @@ select func in "Add a student" "Delete a student" "Add a grade to an existing st
 	esac
 
 done
+}
+
+mainmenu
