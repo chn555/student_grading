@@ -28,8 +28,9 @@ declare -x avg=0
 menu()
 {
 # files lists all student files in the folder
-  files=(students/*.student)
 
+  files=$(find students -type f)
+  echo $files
   declare -a names
 
 # adds all student file names to array
