@@ -29,17 +29,15 @@ menu()
 {
 # files lists all student files in the folder
 
-  files=$(find students -type f)
-  echo $files
+  files=($(ls students))
+  echo ${files[*]}
   declare -a names
 
 # adds all student file names to array
-  for f in $files; do
-    names+=$f
-  done
+
 
 echo Select student
-    select opt in "${names[@]}" "Stop the script"; do
+  select opt in "${files[@]}" "Stop the script"; do
     case $opt in
       *.student)
         echo "Student file $opt selected"
