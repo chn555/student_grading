@@ -1,7 +1,7 @@
 remove_student ()
 {
-read -p "Enter student ID : " id
-rm student/$id.student
+read -p "Enter student ID : " sid
+rm student/$sid.student
 }
 
 
