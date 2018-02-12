@@ -11,19 +11,43 @@ add_student (){
   else
     mkdir students
   fi
-  read -p "Enter student ID : " sid
+  #read -p "Enter student ID : " sid
+  sid=$(zenity --entry \
+    --title="Add new profile" \
+    --text="Enter ID of new student:" \
+    --entry-text "NewStudent")
   until [[ $sid =~ ^[0-9]{3}$ ]] ;do
-    read -p "Invalid ID number, please try again : " sid
+    sid=$(zenity --entry \
+    --title="Add new profile" \
+    --text="ID invalid, Enter ID of new student:" \
+    --entry-text "NewStudent")
+    if [[ $sid == "NewStudent" ]]; then
+      return
+    else
+      :
+    fi
   done
-  read -p "Enter student name : " name
+  #read -p "Enter student name : " name
+  name=$(zenity --entry \
+    --title="Add new profile" \
+    --text="Enter name of new student:" \
+    --entry-text "NewStudent")
   until [[ $name =~ ^[a-Z]{,9}$ ]] ;do
-    read -p "Name is too long or containes invalid characters: " name
+    name=$(zenity --entry \
+    --title="Add new profile" \
+    --text="Name is too long or containes invalid characters, Enter name of new student:" \
+    --entry-text "NewStudent")
+    if [[ $name == "NewStudent" ]]; then
+      return
+    else
+      :
+    fi
   done
   # creates an array with student name and in
   sarr=($sid $name)
   # saves the array to a file, named after the student id
   echo ${sarr[*]} > students/$sid.student
-  echo "Student $name created"
+  zenity --info --text="Student $name created successfully" --width 300
 }
 
 
@@ -246,7 +270,9 @@ student_mavg (){
       fi
     fi
   done
-  echo "The best student was ${sarr[1]} with $mavrg points avarage"
+  #echo "The best student was ${sarr[1]} with $mavrg points avarage"
+  zenity --info \
+  --text="The best student was ${sarr[1]} with $mavrg points avarage" --width=450 --height=0
 }
 
 
