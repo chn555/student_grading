@@ -27,6 +27,10 @@ add_student (){
       :
     fi
   done
+  if [[ -f students/$sid.student ]]; then
+    yad --info --text="Student already exists" --width 300
+    return 1
+  fi
   #read -p "Enter student name : " name
   name=$(yad --entry \
     --title="Add new profile" \
@@ -46,8 +50,7 @@ add_student (){
   # creates an array with student name and in
   sarr=($sid $name)
   # saves the array to a file, named after the student id
-  echo ${sarr[*]} > students/$sid.student
-  yad --info --text="Student $name created successfully" --width 300
+  echo ${sarr[*]} > students/$sid.student && yad --info --text="Student $name created successfully" --width 300
 }
 
 
