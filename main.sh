@@ -12,12 +12,12 @@ add_student (){
     mkdir students
   fi
   #read -p "Enter student ID : " sid
-  sid=$(zenity --entry \
+  sid=$(yad --entry \
     --title="Add new profile" \
     --text="Enter ID of new student:" \
     --entry-text "NewStudent")
   until [[ $sid =~ ^[0-9]{3}$ ]] ;do
-    sid=$(zenity --entry \
+    sid=$(yad --entry \
     --title="Add new profile" \
     --text="ID invalid, Enter ID of new student:" \
     --entry-text "NewStudent")
@@ -28,12 +28,12 @@ add_student (){
     fi
   done
   #read -p "Enter student name : " name
-  name=$(zenity --entry \
+  name=$(yad --entry \
     --title="Add new profile" \
     --text="Enter name of new student:" \
     --entry-text "NewStudent")
   until [[ $name =~ ^[a-Z]{,9}$ ]] ;do
-    name=$(zenity --entry \
+    name=$(yad --entry \
     --title="Add new profile" \
     --text="Name is too long or containes invalid characters, Enter name of new student:" \
     --entry-text "NewStudent")
@@ -53,7 +53,7 @@ add_student (){
 
 add_grade (){
   # inputs the file to the array
-  read -a sarr < "students/$opt"
+  read -a sarr < "students/$student"
   # printts the array
   # echo ${sarr[*]}
   read -p "Enter grade to be added : " grade
@@ -71,12 +71,15 @@ Sub_Menu_Add_Grade (){
   # files lists all student files in the folder
   files=($(ls students))
   echo ${files[*]}
-  declare -a names
-  echo Select student
-  select opt in "${files[@]}" "Stop the script"; do
-    case $opt in
-      *.student)
-        echo "Student file $opt selected"
+  files=("${files[@]/#/\"}")
+  files=("${files[@]/%/\"}")
+  echo ${files[*]}
+  while student=$(yad --list --text="Please select action" --radiolist --column \
+  "Pick" --column "Action" "${files[@]}" \
+  --width=450 --height=350); do
+    case $student in
+      "TRUE|*.student|")
+        echo "Student file $student selected"
         add_grade
         break
       ;;
@@ -278,45 +281,50 @@ student_mavg (){
 
 mainmenu(){
   echo "Which Function would you like to use?"
-  func=$(zenity --list --text="Please select action" --radiolist --column "Pick" --column "Action" FALSE "Add a student" FALSE "Delete a student" FALSE "Add a grade to an existing student" FALSE "Show avarage of a student" FALSE "Show the student with the highest avarage" FALSE "Replace the grades of two students with each other" FALSE "Quit" --width=450 --height=350);
+  func=$(yad --list --text="Please select action" --radiolist --column \
+  "Pick" --column "Action" FALSE "Add a student" FALSE "Delete a student" \
+  FALSE "Add a grade to an existing student" FALSE "Show avarage of a student"\
+  FALSE "Show the student with the highest avarage" \
+  FALSE "Replace the grades of two students with each other" FALSE "Quit" \
+  --width=450 --height=350);
     	 case $func in
-	  	     "Add a student" | "add_student")
+	  	     "TRUE|Add a student|" | "add_student")
               add_student
               printf "\n"
               printf "\n"
               mainmenu
            ;;
-		       "Delete a student" | "remove_student")
+		       "TRUE|Delete a student|" | "remove_student")
               remove_student
               printf "\n"
               printf "\n"
               mainmenu
 		       ;;
-		       "Add a grade to an existing student" | "addgrade")
+		       "TRUE|Add a grade to an existing student|" | "addgrade")
               Sub_Menu_Add_Grade
               printf "\n"
               printf "\n"
               mainmenu
 	         ;;
-		       "Show avarage of a student" | "avgstudent")
+		       "TRUE|Show avarage of a student|" | "avgstudent")
               Sub_Menu_Student_Avarage
               printf "\n"
               printf "\n"
               mainmenu
 		       ;;
-		       "Show the student with the highest avarage" | "mavgstudent")
+		       "TRUE|Show the student with the highest avarage|" | "mavgstudent")
               student_mavg
               printf "\n"
               printf "\n"
               mainmenu
 		       ;;
-		       "Replace the grades of two students with each other" | "replacegrade")
+		       "TRUE|Replace the grades of two students with each other|" | "replacegrade")
               Sub_Menu_Replace_Student
               printf "\n"
               printf "\n"
               mainmenu
 		       ;;
-           "Quit" | "q")
+           "TRUE|Quit|" | "q")
               exit 0
            ;;
 		       *)
