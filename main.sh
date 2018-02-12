@@ -47,44 +47,51 @@ add_student (){
   sarr=($sid $name)
   # saves the array to a file, named after the student id
   echo ${sarr[*]} > students/$sid.student
-  zenity --info --text="Student $name created successfully" --width 300
+  yad --info --text="Student $name created successfully" --width 300
 }
 
 
 add_grade (){
   # inputs the file to the array
-  read -a sarr < "students/$student"
+  read -a sarr < "students/$student.student"
   # printts the array
   # echo ${sarr[*]}
-  read -p "Enter grade to be added : " grade
-  if [[ $grade =~ [0-9]{1,3} ]]; then
+  grade=$(yad --entry \
+    --title="Add new grade" \
+    --text="Enter the new grade:" \
+    --entry-text "NewGrade")
+  until [[ $grade =~ [0-9]{1,2}|100 ]]; do
+    grade=$(yad --entry \
+      --title="Grade is invalid, add new grade" \
+      --text="Enter the new grade:" \
+      --entry-text "NewGrade")
+      if [[ $name == "NewGrade" ]]; then
+        return
+      else
+        :
+      fi
+    done
     sarr+=("$grade")
-    echo ${sarr[*]} > "students/$opt"
-    echo "Grade $grade added "
-  else
-    echo Grade is invalid, exiting and Fuck-a-you
-  fi
+    echo ${sarr[*]} > "students/$student.student"
+    yad --info --text="Grade $grade added successfully" --width 300
 }
 
 
 Sub_Menu_Add_Grade (){
   # files lists all student files in the folder
+  declare -a names
   files=($(ls students))
-  echo ${files[*]}
-  echo ${files[*]}
-  while student=$(yad --list --text="Please select action" --column "Action" $(echo ${files[*]}) \
+  for i in ${files[*]}; do
+    read -a arr < "students/$i"
+    echo ${arr[0]}
+    names+=(${arr[0]})
+  done
+  while student=$(yad --list --separator='' --text="Please select action" --column "Action" $(echo ${names[*]}) \
   --width=450 --height=350 --print--all); do
     case $student in
-      *".student|")
+      *)
         add_grade
         break
-      ;;
-      "Stop the script")
-        echo "You chose to stop"
-        break
-      ;;
-      *)
-        echo "This is not a number"
       ;;
     esac
   done
@@ -277,49 +284,49 @@ student_mavg (){
 
 mainmenu(){
   echo "Which Function would you like to use?"
-  func=$(yad --list --text="Please select action" --column "Action"  "Add a student"  "Delete a student" \
+  func=$(yad --list --separator='' --text="Please select action" --column "Action"  "Add a student"  "Delete a student" \
    "Add a grade to an existing student"  "Show avarage of a student"\
    "Show the student with the highest avarage" \
    "Replace the grades of two students with each other"  "Quit" \
   --width=450 --height=350);
     	 case $func in
-	  	     "Add a student|" | "add_student")
+	  	     "Add a student" | "add_student")
               add_student
               printf "\n"
               printf "\n"
               mainmenu
            ;;
-		       "Delete a student|" | "remove_student")
+		       "Delete a student" | "remove_student")
               remove_student
               printf "\n"
               printf "\n"
               mainmenu
 		       ;;
-		       "Add a grade to an existing student|" | "addgrade")
+		       "Add a grade to an existing student" | "addgrade")
               Sub_Menu_Add_Grade
               printf "\n"
               printf "\n"
               mainmenu
 	         ;;
-		       "Show avarage of a student|" | "avgstudent")
+		       "Show avarage of a student" | "avgstudent")
               Sub_Menu_Student_Avarage
               printf "\n"
               printf "\n"
               mainmenu
 		       ;;
-		       "Show the student with the highest avarage|" | "mavgstudent")
+		       "Show the student with the highest avarage" | "mavgstudent")
               student_mavg
               printf "\n"
               printf "\n"
               mainmenu
 		       ;;
-		       "Replace the grades of two students with each other|" | "replacegrade")
+		       "Replace the grades of two students with each other" | "replacegrade")
               Sub_Menu_Replace_Student
               printf "\n"
               printf "\n"
               mainmenu
 		       ;;
-           "Quit|" | "q")
+           "Quit" | "q")
               exit 0
            ;;
 		       *)
