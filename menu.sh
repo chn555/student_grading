@@ -9,8 +9,8 @@ mainmenu()
 echo "Which Function would you like to use?"
 
 
-select func in "Add a student" "Delete a student" "Add a grade to an existing student" "Show avarage of a student" "Show the student with the highest avarage" "Replace the grades of two students with each other" "Quit"
-    do
+func=$(zenity --list --text="Please select action" --radiolist --column "Pick" --column "Action" TRUE "Add a student" FALSE "Delete a student" FALSE "Add a grade to an existing student" FALSE "Show avarage of a student" FALSE "Show the student with the highest avarage" FALSE "Replace the grades of two students with each other" FALSE "Quit" --width=450 --height=350);
+
   	 case $func in
 		"Add a student" | "add_student")
       add_student
@@ -56,7 +56,7 @@ select func in "Add a student" "Delete a student" "Add a grade to an existing st
 		;;
 	esac
 
-done
+
 }
 
 mainmenu
