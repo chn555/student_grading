@@ -96,18 +96,13 @@ replace_students (){
   sarr_two=($(cat students/$student_two))
   tmparray_one=(${sarr_one[@]:2})
   tmparray_two=(${sarr_two[@]:2})
-
   sarr_one=(${sarr_one[@]:0:2} ${tmparray_two[*]})
   sarr_two=(${sarr_two[@]:0:2} ${tmparray_one[*]})
-
   echo ${sarr_one[*]} > students/$student_one
   echo ${sarr_two[*]} > students/$student_two
-
   cat students/$student_one
   cat students/$student_two
-
   echo "Succeeded"
-  exit
 }
 
 
