@@ -132,63 +132,49 @@ replace_students (){
   echo ${sarr_two[*]} > students/$student_two
   cat students/$student_one
   cat students/$student_two
-  echo "Succeeded"
+  yad --info --text="Students replaced  successfully" --width 300
+  return 0
 }
 
 
 Sub_Menu_Replace_Student (){
   # files lists all student files in the folder
-  files=($(ls students))
   student_one=""
   student_two=""
-  # echo ${files[*]}
-  # adds all student file names to array
-  echo Select student one
-  select opt in "${files[@]}" "Stop the script"; do
-    case $opt in
-      *.student)
-        echo "Student file $opt selected"
-        #sid=$opt
-        #echo $opt
-        student_one=$opt
-        echo $student_one
-        break
-        ;;
-      "Stop the script")
-        echo "You chose to stop"
-        exit
-        ;;
+  declare -a names
+  files=($(ls students))
+  for i in ${files[*]}; do
+    read -a arr < "students/$i"
+    echo ${arr[0]}
+    names+=(${arr[0]})
+  done
+  while student1=$(yad --list --separator='' --text="Please select student 1" --column "Action" $(echo ${names[*]}) \
+  --width=450 --height=350 --print--all); do
+    case $student1 in
       *)
-        echo "This is not a number"
+        student_one=$student1.student
+        break
         ;;
     esac
   done
-  echo Select student two
-      select opt in "${files[@]}" "Stop the script"; do
-        case $opt in
-          *.student)
-            echo "Student file $opt selected"
-            #sid=$opt
-            #echo $opt
-            student_two=$opt
-            echo $student_two
-            read -p "Are you sure you want to replace $student_one grades with $student_two? [y/n]" answer
-            if [[ $answer =~ y|Y|"YES"|"yes" ]] ;then
-              replace_students
-            elif [[ $answer =~ n|N|"NO"|"no" ]] ;then
-              echo "FuckAYou then"
-              break
+  while student2=$(yad --list --separator='' --text="Please select student 2" --column "Action" $(echo ${names[*]}) \
+  --width=450 --height=350 --print--all); do
+    case $student2 in
+          *)
+            student_two=$student2.student
+            answer=$(yad --list --seperator='' --text="Are you sure you \
+            want to replace student $student1 with $student2 ?"\
+            --column "Action" "Yes" "No" )
+            if [[ $answer =~ y|Y|"YES"|"Yes|" ]] ;then
+                replace_students
+            elif [[ $answer =~ n|N|"No"|"no|" ]] ;then
+              yad --info --text="Exiting"
+              return 0
             else
               echo "Invalid answer. exiting"
               break
             fi
-          ;;
-          "Stop the script")
-            echo "You chose to stop"
-            break
-          ;;
-          *)
-            echo "This is not a number"
+            return 0
           ;;
         esac
       done
@@ -198,7 +184,7 @@ Sub_Menu_Replace_Student (){
 student_avg (){
   # opens the file into an array called sarr
   # read -a sarr < $id
-  read -a  sarr < "students/$opt"
+  read -a  sarr < "students/$student.student"
   maxcount=${#sarr[*]}
   elenumber=$( expr $maxcount - 2 )
   declare -x avg=0
@@ -213,35 +199,28 @@ student_avg (){
       done
       TurboAnalIsisAVG=$(expr $sum / $elenumber )
   fi
-  echo "The avarage of student ${sarr[1]} is $TurboAnalIsisAVG points."
+  yad --info --text="The avarage of student ${sarr[1]} is $TurboAnalIsisAVG points" --width 300
 }
 
 
 Sub_Menu_Student_Avarage (){
   # files lists all student files in the folder
-  files=($(ls students))
-  echo ${files[*]}
   declare -a names
-  # adds all student file names to array
-  echo Select student
-    select opt in "${files[@]}" "Stop the script"; do
-      case $opt in
-        *.student)
-          echo "Student file $opt selected"
-          #sid=$opt
-          #echo $opt
-          student_avg
-          break
-        ;;
-        "Stop the script")
-          echo "You chose to stop"
-          break
-        ;;
-        *)
-          echo "This is not a number"
-        ;;
-      esac
-    done
+  files=($(ls students))
+  for i in ${files[*]}; do
+    read -a arr < "students/$i"
+    echo ${arr[0]}
+    names+=(${arr[0]})
+  done
+  while student=$(yad --list --separator='' --text="Please select action" --column "Action" $(echo ${names[*]}) \
+  --width=450 --height=350 --print--all); do
+    case $student in
+      *)
+        student_avg
+        break
+      ;;
+    esac
+  done
 }
 
 
