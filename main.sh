@@ -5,8 +5,7 @@
 #Version 0.0.1 12/02/18
 
 
-add_student ()
-{
+add_student (){
   if [[ -d students ]]; then
     :
   else
@@ -28,8 +27,7 @@ add_student ()
 }
 
 
-add_grade ()
-{
+add_grade (){
   # inputs the file to the array
   read -a sarr < "students/$opt"
   # printts the array
@@ -45,8 +43,7 @@ add_grade ()
 }
 
 
-Sub_Menu_Add_Grade ()
-{
+Sub_Menu_Add_Grade (){
   # files lists all student files in the folder
   files=($(ls students))
   echo ${files[*]}
@@ -71,8 +68,7 @@ Sub_Menu_Add_Grade ()
 }
 
 
-remove_student ()
-{
+remove_student (){
   files=($(ls students))
   echo ${files[*]}
   select opt in "${files[@]}" "Stop the script"; do
@@ -95,8 +91,7 @@ remove_student ()
 }
 
 
-replace_students ()
-{
+replace_students (){
   sarr_one=($(cat students/$student_one))
   sarr_two=($(cat students/$student_two))
   tmparray_one=(${sarr_one[@]:2})
@@ -116,8 +111,7 @@ replace_students ()
 }
 
 
-Sub_Menu_Replace_Student ()
-{
+Sub_Menu_Replace_Student (){
   # files lists all student files in the folder
   files=($(ls students))
   student_one=""
@@ -176,8 +170,7 @@ Sub_Menu_Replace_Student ()
 }
 
 
-student_avg ()
-{
+student_avg (){
   # opens the file into an array called sarr
   # read -a sarr < $id
   read -a  sarr < "students/$opt"
@@ -199,8 +192,7 @@ student_avg ()
 }
 
 
-Sub_Menu_Student_Avarage()
-{
+Sub_Menu_Student_Avarage (){
   # files lists all student files in the folder
   files=($(ls students))
   echo ${files[*]}
@@ -228,8 +220,7 @@ Sub_Menu_Student_Avarage()
 }
 
 
-student_mavg ()
-{
+student_mavg (){
   files=students/*.student
   mavrg=0
   mavrgstudent="no one"
@@ -264,8 +255,7 @@ student_mavg ()
 }
 
 
-mainmenu()
-{
+mainmenu(){
   echo "Which Function would you like to use?"
   func=$(zenity --list --text="Please select action" --radiolist --column "Pick" --column "Action" FALSE "Add a student" FALSE "Delete a student" FALSE "Add a grade to an existing student" FALSE "Show avarage of a student" FALSE "Show the student with the highest avarage" FALSE "Replace the grades of two students with each other" FALSE "Quit" --width=450 --height=350);
     	 case $func in
