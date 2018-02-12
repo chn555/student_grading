@@ -1,6 +1,12 @@
 add_student ()
 {
 
+  if [[ -d students ]]; then
+    :
+  else
+    mkdir students
+  fi
+  
   read -p "Enter student ID : " sid
 
   until [[ $sid =~ ^[0-9]{3}$ ]] ;do
