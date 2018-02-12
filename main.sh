@@ -71,15 +71,11 @@ Sub_Menu_Add_Grade (){
   # files lists all student files in the folder
   files=($(ls students))
   echo ${files[*]}
-  files=("${files[@]/#/\"}")
-  files=("${files[@]/%/\"}")
   echo ${files[*]}
-  while student=$(yad --list --text="Please select action" --radiolist --column \
-  "Pick" --column "Action" "${files[@]}" \
-  --width=450 --height=350); do
+  while student=$(yad --list --text="Please select action" --column "Action" $(echo ${files[*]}) \
+  --width=450 --height=350 --print--all); do
     case $student in
-      "TRUE|*.student|")
-        echo "Student file $student selected"
+      *".student|")
         add_grade
         break
       ;;
@@ -281,50 +277,49 @@ student_mavg (){
 
 mainmenu(){
   echo "Which Function would you like to use?"
-  func=$(yad --list --text="Please select action" --radiolist --column \
-  "Pick" --column "Action" FALSE "Add a student" FALSE "Delete a student" \
-  FALSE "Add a grade to an existing student" FALSE "Show avarage of a student"\
-  FALSE "Show the student with the highest avarage" \
-  FALSE "Replace the grades of two students with each other" FALSE "Quit" \
+  func=$(yad --list --text="Please select action" --column "Action"  "Add a student"  "Delete a student" \
+   "Add a grade to an existing student"  "Show avarage of a student"\
+   "Show the student with the highest avarage" \
+   "Replace the grades of two students with each other"  "Quit" \
   --width=450 --height=350);
     	 case $func in
-	  	     "TRUE|Add a student|" | "add_student")
+	  	     "Add a student|" | "add_student")
               add_student
               printf "\n"
               printf "\n"
               mainmenu
            ;;
-		       "TRUE|Delete a student|" | "remove_student")
+		       "Delete a student|" | "remove_student")
               remove_student
               printf "\n"
               printf "\n"
               mainmenu
 		       ;;
-		       "TRUE|Add a grade to an existing student|" | "addgrade")
+		       "Add a grade to an existing student|" | "addgrade")
               Sub_Menu_Add_Grade
               printf "\n"
               printf "\n"
               mainmenu
 	         ;;
-		       "TRUE|Show avarage of a student|" | "avgstudent")
+		       "Show avarage of a student|" | "avgstudent")
               Sub_Menu_Student_Avarage
               printf "\n"
               printf "\n"
               mainmenu
 		       ;;
-		       "TRUE|Show the student with the highest avarage|" | "mavgstudent")
+		       "Show the student with the highest avarage|" | "mavgstudent")
               student_mavg
               printf "\n"
               printf "\n"
               mainmenu
 		       ;;
-		       "TRUE|Replace the grades of two students with each other|" | "replacegrade")
+		       "Replace the grades of two students with each other|" | "replacegrade")
               Sub_Menu_Replace_Student
               printf "\n"
               printf "\n"
               mainmenu
 		       ;;
-           "TRUE|Quit|" | "q")
+           "Quit|" | "q")
               exit 0
            ;;
 		       *)
