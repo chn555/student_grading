@@ -25,7 +25,7 @@ select func in "Add a student" "Delete a student" "Add a grade to an existing st
       mainmenu
 		       ;;
 		"Add a grade to an existing student" | "addgrade")
-      add_grade
+      Sub_Menu_Add_Grade
         printf "\n"
         printf "\n"
       mainmenu
@@ -43,7 +43,7 @@ select func in "Add a student" "Delete a student" "Add a grade to an existing st
       mainmenu
 		       ;;
 		"Replace the grades of two students with each other" | "replacegrade")
-      replace_student
+      Sub_Menu_Replace_Student
         printf "\n"
         printf "\n"
       mainmenu
