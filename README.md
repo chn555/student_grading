@@ -19,3 +19,10 @@ this software has 6 functions
 this software is still in development and might not work.
 
 the zenity branch includes a GUI enviroment and is still in early development
+
+
+instructions
+
+git clone https://github.com/chn555/student_grading
+
+run main.sh
