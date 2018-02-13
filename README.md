@@ -25,7 +25,7 @@ clone the master branch
 clone https://github.com/chn555/student_grading
 ```
 
-moce into the directory and give main.sh permissions 
+move into the directory and give main.sh permissions 
 
 ```
 cd student_grading
