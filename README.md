@@ -37,10 +37,10 @@ chmod +x main.sh
 ##
 ## Authors
 
-* **DorShamay** - *Initial work* - (https://github.com/DorShamay)
-* **yahavP** - *Initial work* - (https://github.com/YahavP)
-* **BigRush** - *Initial work* - (https://github.com/BigRush)
-* **chn555** - *Initial work* -(https://github.com/chn555)
+* **DorShamay** - (https://github.com/DorShamay)
+* **yahavP** - (https://github.com/YahavP)
+* **BigRush** - (https://github.com/BigRush)
+* **chn555** -(https://github.com/chn555)
 
 
 
