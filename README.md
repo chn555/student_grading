@@ -22,7 +22,7 @@ A step by step series of examples that tell you have to get a development env ru
 clone the master branch
 
 ```
-clone https://github.com/chn555/student_grading
+git clone https://github.com/chn555/student_grading
 ```
 
 move into the directory and give main.sh permissions 
