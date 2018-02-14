@@ -33,6 +33,13 @@ chmod +x main.sh
 ```
 
 
+### TODO
+1. split the whole thing into 2 files, one that containes all the functions and one that runs them.
+2. check everything for faults 
+3. auto-download yad, and verify it exists
+
+
+
 
 ##
 ## Authors
