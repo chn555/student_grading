@@ -206,7 +206,8 @@ student_avg (){
   elenumber=$( expr $maxcount - 2 )
   declare -x avg=0
   if [[ $maxcount -le 1 ]]; then
-    :
+    yad --info --text="The student $student has no grades" --width 300
+    return
   elif [[ $maxcount -eq 2 ]]; then
     avg=${sarr[2]}
   else
