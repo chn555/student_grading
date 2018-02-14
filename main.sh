@@ -101,26 +101,40 @@ Sub_Menu_Add_Grade (){
 }
 
 
-remove_student (){
+Sub_Menu_Remove_Student(){
+  declare -a names
   files=($(ls students))
-  echo ${files[*]}
-  select opt in "${files[@]}" "Stop the script"; do
-	   case $opt in
-		     *.student)
-		  	    echo "Student will be removed shortly"
-			      echo $opt
-			      rm students/$opt
-			      break
-			   ;;
-		     "Stop the script")
-			      echo "You chose to exit"
-			      break
-			   ;;
-		     *)
-			      echo "This is invalid"
-			   ;;
-		 esac
-	 done
+  for i in ${files[*]}; do
+    read -a arr < "students/$i"
+    echo ${arr[0]}
+    names+=(${arr[0]})
+  done
+  while Student_To_Remove=$(yad --list --separator='' --text="Please select action" --column "Action" $(echo ${names[*]}) \
+  --width=450 --height=350 --print--all); do
+    case $Student_To_Remove in
+      *)
+        remove_student
+        break
+      ;;
+    esac
+  done
+}
+
+
+remove_student (){
+  answer=$(yad --list --seperator='' --text="Are you sure you \
+  want to remove $Student_To_Remove ?"\
+  --column "Action" "Yes" "No" )
+  if [[ $answer =~ y|Y|"YES"|"Yes|" ]] ;then
+      rm students/$Student_To_Remove.student
+  elif [[ $answer =~ n|N|"No"|"no|" ]] ;then
+    yad --info --text="Exiting"
+    return 0
+  else
+    echo "Invalid answer. exiting"
+    break
+  fi
+  yad --info --text="Student $Student_To_Remove removed successfully" --width 300
 }
 
 
@@ -279,7 +293,7 @@ mainmenu(){
               mainmenu
            ;;
 		       "Delete a student" | "remove_student")
-              remove_student
+              Sub_Menu_Remove_Student
               printf "\n"
               printf "\n"
               mainmenu
