@@ -68,7 +68,7 @@ add_grade (){
       --title="Grade is invalid, add new grade" \
       --text="Enter the new grade:" \
       --entry-text "NewGrade")
-      if [[ $name == "NewGrade" ]]; then
+      if [[ $grade == "NewGrade" ]]; then
         return
       else
         :
