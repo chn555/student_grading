@@ -28,50 +28,48 @@ RedHat_Distribution_Check (){
 	fi
 }
 
-yad_validation (){
+zenity_validation (){
 	line=\#\#\#\#\#\#\#\#\#\#
-	line2=\@\@\@\@\@\@\@\@\@\@
-	line3=\!\!\!\!\!\!\!\!\!\!
 	Arch_Distribution_Check
 	Debian_Distribution_Check
 	RedHat_Distribution_Check
-  which yad &> /dev/null
+  which zenity &> /dev/null
   if [[ $? -eq 0 ]] ;then
     :
   else
-		echo "Yad not installed"
+		echo "zenity not installed"
 		if [[ $Distro_Validation =~ "arch" ]] ;then
-			echo "$line Please enter password to install yad $line"
-			sudo pacman -S yad --noconfirm &> /dev/null
+			echo "$line Please enter password to install zenity $line"
+			sudo pacman -S zenity --noconfirm &> /dev/null
 			if [[ $? -eq 0 ]] ;then
-				echo "$line2 Yad installation complete $line2"
+				echo "$line zenity installation complete $line"
 			else
-				echo "$line3 Something went wrong $line3"
+				echo "$line Something went wrong $line"
 				exit
 			fi
 		elif [[ $Distro_Validation =~ "debian" ]] ;then
-				echo "$line Please enter password to install yad $line"
-				sudo apt-get install yad -y &> /dev/null
+				echo "$line Please enter password to install zenity $line"
+				sudo apt-get install zenity -y &> /dev/null
 				if [[ $? -eq 0 ]] ;then
-					echo "$line2 Yad installation complete $line2"
+					echo "$line zenity installation complete $line"
 				else
-					echo "$line3 Something went wrong $line3"
+					echo "$line Something went wrong $line"
 					exit
 				fi
 		elif [[ $Distro_Validation =~ "redhat" ]] ;then
-				echo "$line Please enter password to install yad $line"
-				sudo yum install yad -y &> /dev/null
+				echo "$line Please enter password to install zenity $line"
+				sudo yum install zenity -y &> /dev/null
 				if [[ $? -eq 0 ]] ;then
-						echo "$line2 Yad installation complete $line2"
+						echo "$line zenity installation complete $line"
 				else
-						echo "$line3 Something went wrong $line3"
+						echo "$line Something went wrong $line"
 						exit
 				fi
 		else
-				echo "This script does not support your automatic installation of yad on your distribution"
-				echo "However you can install yad manualy and run again this script"
+				echo "This script does not support automatic installation of zenity on your distribution."
+				echo "However you can install zenity manualy and run this script again."
 				exit
 		fi
   fi
 }
-yad_validation
+zenity_validation
