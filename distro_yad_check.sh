@@ -1,8 +1,7 @@
 #!/bin/bash
 
 
-Arch_Distribution_Check ()
-{
+Arch_Distribution_Check (){
 	cat /etc/*-release |grep ID |cut -d "=" -f "2" |grep -e ^manjaro$ -e ^arch$ &> /dev/null
 	if [[ $? -eq 0 ]] ;then
 		Distro_Validation="arch"
@@ -11,8 +10,7 @@ Arch_Distribution_Check ()
 	fi
 }
 
-Debian_Distribution_Check ()
-{
+Debian_Distribution_Check (){
 	cat /etc/*-release |grep ID |cut -d "=" -f "2" |grep ^debian$ &> /dev/null
 	if [[ $? -eq 0	]] ;then
 		Distro_Validation="debian"
@@ -21,8 +19,7 @@ Debian_Distribution_Check ()
 	fi
 }
 
-RedHat_Distribution_Check ()
-{
+RedHat_Distribution_Check (){
 	cat /etc/*-release |grep ID |cut -d "=" -f "2" |grep -e ^\"centos\"$ -e ^\"fedora\"$ &> /dev/null
 	if [[ $? -eq 0	]] ;then
 		Distro_Validation="redhat"
@@ -31,8 +28,7 @@ RedHat_Distribution_Check ()
 	fi
 }
 
-yad_validation ()
-{
+yad_validation (){
 	line=\#\#\#\#\#\#\#\#\#\#
 	Arch_Distribution_Check
 	Debian_Distribution_Check
