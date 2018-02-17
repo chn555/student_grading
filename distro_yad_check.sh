@@ -33,11 +33,17 @@ RedHat_Distribution_Check ()
 
 yad_validation ()
 {
+	line=\#\#\#\#\#\#\#\#\#\#
+	Arch_Distribution_Check
+	Debian_Distribution_Check
+	RedHat_Distribution_Check
   which yad &> /dev/null
   if [[ $? -eq 0 ]] ;then
     :
   else
+		echo "Yad not installed"
 		if [[ $Distro_Validation =~ "arch" ]] ;then
+			echo "$line Please enter password to install yad $line"
 			sudo pacman -S yad --noconfirm &> /dev/null
 			if [[ $? -eq 0 ]] ;then
 				echo "Yad installation complete"
@@ -46,6 +52,7 @@ yad_validation ()
 				exit
 			fi
 		elif [[ $Distro_Validation =~ "debian" ]] ;then
+				echo "$line Please enter password to install yad $line"
 				sudo apt-get install yad -y &> /dev/null
 				if [[ $? -eq 0 ]] ;then
 					echo "Yad installation complete"
@@ -54,6 +61,7 @@ yad_validation ()
 					exit
 				fi
 		elif [[ $Distro_Validation =~ "redhat" ]] ;then
+				echo "$line Please enter password to install yad $line"
 				sudo yum install yad -y &> /dev/null
 				if [[ $? -eq 0 ]] ;then
 						echo "Yad installation complete"
@@ -68,7 +76,4 @@ yad_validation ()
 		fi
   fi
 }
-Arch_Distribution_Check
-Debian_Distribution_Check
-RedHat_Distribution_Check
 yad_validation
