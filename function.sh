@@ -1,9 +1,17 @@
 #!/bin/bash
 
 #Creator : fuck a you DorShamay && BigRush && Yahav && Chn555
-#Purpose : Make a menu to StudentGrading functions
+#Purpose : all functions
 #Version 0.0.1 12/02/18
 
+Root_Check(){
+	if [[ $UID = 0 ]] ; then
+		echo This script must be run as normal user, Exiting
+		exit 1
+	else
+		:
+	fi
+}
 Manjaro_Distribution_Check ()
 {
 	cat /etc/*-release |grep ID |cut -d "=" -f "2" |grep ^manjaro$
