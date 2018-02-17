@@ -4,6 +4,8 @@
 #Purpose : all functions
 #Version 0.0.1 12/02/18
 
+
+# checkif user is root by UID
 Root_Check(){
 	if [[ $UID = 0 ]] ; then
 		echo This script must be run as normal user, Exiting
@@ -12,8 +14,9 @@ Root_Check(){
 		:
 	fi
 }
-Manjaro_Distribution_Check ()
-{
+
+# check if distro is manjaro by checking the file os-release
+Manjaro_Distribution_Check (){
 	cat /etc/*-release |grep ID |cut -d "=" -f "2" |grep ^manjaro$
 	if [[ $? -eq 0 ]] ;then
 		Distro_Validation="manjaro"
@@ -22,8 +25,8 @@ Manjaro_Distribution_Check ()
 	fi
 }
 
-Debian_Distribution_Check ()
-{
+# check if distro is debian by checking the file os-release
+Debian_Distribution_Check (){
 	cat /etc/*-release |grep ID |cut -d "=" -f "2" |grep ^debian$
 	if [[ $? -eq 0	]] ;then
 		Distro_Validation="debian"
@@ -32,8 +35,8 @@ Debian_Distribution_Check ()
 	fi
 }
 
-CentOS_Distribution_Check ()
-{
+# check if distro is centos by checking the file os-release
+CentOS_Distribution_Check (){
 	cat /etc/*-release |grep ID |cut -d "=" -f "2" |grep ^centos$
 	if [[ $? -eq 0	]] ;then
 		Distro_Validation="redhat"
@@ -42,6 +45,7 @@ CentOS_Distribution_Check ()
 	fi
 }
 
+# check if yad is installed, if not then installs it
 yad_validation (){
   which yad &> /dev/null
   if [[ $? -eq 0 ]] ;then
@@ -51,6 +55,8 @@ yad_validation (){
   fi
 }
 
+# adds a student by using 2 gui prompts, entering them into an array and
+# echoing it into a file
 add_student (){
   if [[ -d students ]]; then
     :
@@ -100,6 +106,8 @@ add_student (){
 }
 
 
+# adds grade to an existing student by pulling the array from the file,
+# adding an element to it and echoing it back to the file
 add_grade (){
   # inputs the file to the array
   read -a sarr < "students/$student.student"
@@ -125,7 +133,8 @@ add_grade (){
     yad --info --text="Grade $grade added successfully" --width 300
 }
 
-
+# provides a menu for selecting the user by listing all the student files,
+# taking the ID element in the array and displaying it
 Sub_Menu_Add_Grade (){
   # files lists all student files in the folder
   declare -a names
@@ -146,7 +155,8 @@ Sub_Menu_Add_Grade (){
   done
 }
 
-
+# provides a menu for selecting the user by listing all the student files,
+# taking the ID element in the array and displaying it
 Sub_Menu_Remove_Student(){
   declare -a names
   files=($(ls students))
@@ -166,7 +176,7 @@ Sub_Menu_Remove_Student(){
   done
 }
 
-
+# removes students by deleting the file
 remove_student (){
   answer=$(yad --list --seperator='' --text="Are you sure you \
   want to remove $Student_To_Remove ?"\
@@ -183,7 +193,8 @@ remove_student (){
   yad --info --text="Student $Student_To_Remove removed successfully" --width 300
 }
 
-
+# switches the grades of 2 students by replacing elements 2 onward of the students
+# with each other
 replace_students (){
   sarr_one=($(cat students/$student_one))
   sarr_two=($(cat students/$student_two))
@@ -199,7 +210,8 @@ replace_students (){
   return 0
 }
 
-
+# provides a menu for selecting the user by listing all the student files,
+# taking the ID element in the array and displaying it
 Sub_Menu_Replace_Student (){
   # files lists all student files in the folder
   student_one=""
@@ -243,7 +255,7 @@ Sub_Menu_Replace_Student (){
       done
 }
 
-
+# calculates a student avg by adding all the grades and then deviding by the number of grades
 student_avg (){
   # opens the file into an array called sarr
   # read -a sarr < $id
@@ -266,7 +278,8 @@ student_avg (){
   yad --info --text="The avarage of student ${sarr[1]} is $TurboAnalIsisAVG points" --width 300
 }
 
-
+# provides a menu for selecting the user by listing all the student files,
+# taking the ID element in the array and displaying it
 Sub_Menu_Student_Avarage (){
   # files lists all student files in the folder
   declare -a names
@@ -287,7 +300,8 @@ Sub_Menu_Student_Avarage (){
   done
 }
 
-
+# calculates the highest avg by calculating avg for all the students and
+# saving the highest one along with the student name
 student_mavg (){
   files=students/*.student
   mavrg=0
@@ -324,7 +338,7 @@ student_mavg (){
   --text="The best student was ${sarr[1]} with $mavrg points avarage" --width=450 --height=0
 }
 
-
+# provides a menu for selecting the functions
 mainmenu(){
   echo "Which Function would you like to use?"
   func=$(yad --list --separator='' --text="Please select action" --column "Action"  "Add a student"  "Delete a student" \
