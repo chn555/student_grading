@@ -58,10 +58,10 @@ yad_validation (){
 # adds a student by using 2 gui prompts, entering them into an array and
 # echoing it into a file
 add_student (){
-  if [[ -d students ]]; then
+  if [[ -d $HOME/students ]]; then
     :
   else
-    mkdir students
+    mkdir $HOME/students
   fi
   #read -p "Enter student ID : " sid
   sid=$(yad --entry \
@@ -79,7 +79,7 @@ add_student (){
       :
     fi
   done
-  if [[ -f students/$sid.student ]]; then
+  if [[ -f $HOME/students/$sid.student ]]; then
     yad --info --text="Student already exists" --width 300
     return 1
   fi
@@ -102,7 +102,7 @@ add_student (){
   # creates an array with student name and in
   sarr=($sid $name)
   # saves the array to a file, named after the student id
-  echo ${sarr[*]} > students/$sid.student && yad --info --text="Student $name created successfully" --width 300
+  echo ${sarr[*]} > $HOME/students/$sid.student && yad --info --text="Student $name created successfully" --width 300
 }
 
 
@@ -110,7 +110,7 @@ add_student (){
 # adding an element to it and echoing it back to the file
 add_grade (){
   # inputs the file to the array
-  read -a sarr < "students/$student.student"
+  read -a sarr < "$HOME/students/$student.student"
   # printts the array
   # echo ${sarr[*]}
   grade=$(yad --entry \
@@ -129,7 +129,7 @@ add_grade (){
       fi
     done
     sarr+=("$grade")
-    echo ${sarr[*]} > "students/$student.student"
+    echo ${sarr[*]} > "$HOME/students/$student.student"
     yad --info --text="Grade $grade added successfully" --width 300
 }
 
@@ -138,9 +138,9 @@ add_grade (){
 Sub_Menu_Add_Grade (){
   # files lists all student files in the folder
   declare -a names
-  files=($(ls students))
+  files=($(ls $HOME/students))
   for i in ${files[*]}; do
-    read -a arr < "students/$i"
+    read -a arr < "$HOME/students/$i"
     echo ${arr[0]}
     names+=(${arr[0]})
   done
@@ -159,9 +159,9 @@ Sub_Menu_Add_Grade (){
 # taking the ID element in the array and displaying it
 Sub_Menu_Remove_Student(){
   declare -a names
-  files=($(ls students))
+  files=($(ls $HOME/students))
   for i in ${files[*]}; do
-    read -a arr < "students/$i"
+    read -a arr < "$HOME/students/$i"
     echo ${arr[0]}
     names+=(${arr[0]})
   done
@@ -182,7 +182,7 @@ remove_student (){
   want to remove $Student_To_Remove ?"\
   --column "Action" "Yes" "No" )
   if [[ $answer =~ y|Y|"YES"|"Yes|" ]] ;then
-      rm students/$Student_To_Remove.student
+      rm $HOME/students/$Student_To_Remove.student
   elif [[ $answer =~ n|N|"No"|"no|" ]] ;then
     yad --info --text="Exiting"
     return 0
@@ -196,16 +196,16 @@ remove_student (){
 # switches the grades of 2 students by replacing elements 2 onward of the students
 # with each other
 replace_students (){
-  sarr_one=($(cat students/$student_one))
-  sarr_two=($(cat students/$student_two))
+  sarr_one=($(cat $HOME/students/$student_one))
+  sarr_two=($(cat $HOME/students/$student_two))
   tmparray_one=(${sarr_one[@]:2})
   tmparray_two=(${sarr_two[@]:2})
   sarr_one=(${sarr_one[@]:0:2} ${tmparray_two[*]})
   sarr_two=(${sarr_two[@]:0:2} ${tmparray_one[*]})
-  echo ${sarr_one[*]} > students/$student_one
-  echo ${sarr_two[*]} > students/$student_two
-  cat students/$student_one
-  cat students/$student_two
+  echo ${sarr_one[*]} > $HOME/students/$student_one
+  echo ${sarr_two[*]} > $HOME/students/$student_two
+  cat $HOME/students/$student_one
+  cat $HOME/students/$student_two
   yad --info --text="Students replaced  successfully" --width 300
   return 0
 }
@@ -217,9 +217,9 @@ Sub_Menu_Replace_Student (){
   student_one=""
   student_two=""
   declare -a names
-  files=($(ls students))
+  files=($(ls $HOME/students))
   for i in ${files[*]}; do
-    read -a arr < "students/$i"
+    read -a arr < "$HOME/students/$i"
     echo ${arr[0]}
     names+=(${arr[0]})
   done
@@ -259,7 +259,7 @@ Sub_Menu_Replace_Student (){
 student_avg (){
   # opens the file into an array called sarr
   # read -a sarr < $id
-  read -a  sarr < "students/$student.student"
+  read -a  sarr < "$HOME/students/$student.student"
   maxcount=${#sarr[*]}
   elenumber=$( expr $maxcount - 2 )
   declare -x avg=0
@@ -283,9 +283,9 @@ student_avg (){
 Sub_Menu_Student_Avarage (){
   # files lists all student files in the folder
   declare -a names
-  files=($(ls students))
+  files=($(ls $HOME/students))
   for i in ${files[*]}; do
-    read -a arr < "students/$i"
+    read -a arr < "$HOME/students/$i"
     echo ${arr[0]}
     names+=(${arr[0]})
   done
@@ -303,7 +303,7 @@ Sub_Menu_Student_Avarage (){
 # calculates the highest avg by calculating avg for all the students and
 # saving the highest one along with the student name
 student_mavg (){
-  files=students/*.student
+  files=$HOME/students/*.student
   mavrg=0
   mavrgstudent="no one"
   for f in $files; do
