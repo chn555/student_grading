@@ -16,45 +16,77 @@ Root_Check(){
 }
 
 # check if distro is manjaro by checking the file os-release
-Manjaro_Distribution_Check (){
-	cat /etc/*-release |grep ID |cut -d "=" -f "2" |grep ^manjaro$
+Arch_Distribution_Check (){
+	cat /etc/*-release |grep ID |cut -d "=" -f "2" |grep -e ^manjaro$ -e ^arch$ &> /dev/null
 	if [[ $? -eq 0 ]] ;then
-		Distro_Validation="manjaro"
+		Distro_Validation="arch"
 	else
 	   :
 	fi
 }
 
-# check if distro is debian by checking the file os-release
 Debian_Distribution_Check (){
-	cat /etc/*-release |grep ID |cut -d "=" -f "2" |grep ^debian$
+	cat /etc/*-release |grep ID |cut -d "=" -f "2" |grep ^debian$ &> /dev/null
 	if [[ $? -eq 0	]] ;then
 		Distro_Validation="debian"
 	else
-		continue
+		:
 	fi
 }
 
-# check if distro is centos by checking the file os-release
-CentOS_Distribution_Check (){
-	cat /etc/*-release |grep ID |cut -d "=" -f "2" |grep ^centos$
+RedHat_Distribution_Check (){
+	cat /etc/*-release |grep ID |cut -d "=" -f "2" |grep -e ^\"centos\"$ -e ^\"fedora\"$ &> /dev/null
 	if [[ $? -eq 0	]] ;then
 		Distro_Validation="redhat"
 	else
-		continue
+		:
 	fi
 }
 
-# check if yad is installed, if not then installs it
 yad_validation (){
+	line=\#\#\#\#\#\#\#\#\#\#
+	Arch_Distribution_Check
+	Debian_Distribution_Check
+	RedHat_Distribution_Check
   which yad &> /dev/null
   if [[ $? -eq 0 ]] ;then
     :
   else
-		:
+		echo "Yad not installed"
+		if [[ $Distro_Validation =~ "arch" ]] ;then
+			echo "$line Please enter password to install yad $line"
+			sudo pacman -S yad --noconfirm &> /dev/null
+			if [[ $? -eq 0 ]] ;then
+				echo "Yad installation complete"
+			else
+				echo "Something went wrong..."
+				exit
+			fi
+		elif [[ $Distro_Validation =~ "debian" ]] ;then
+				echo "$line Please enter password to install yad $line"
+				sudo apt-get install yad -y &> /dev/null
+				if [[ $? -eq 0 ]] ;then
+					echo "Yad installation complete"
+				else
+					echo "Something went wrong..."
+					exit
+				fi
+		elif [[ $Distro_Validation =~ "redhat" ]] ;then
+				echo "$line Please enter password to install yad $line"
+				sudo yum install yad -y &> /dev/null
+				if [[ $? -eq 0 ]] ;then
+						echo "Yad installation complete"
+				else
+						echo "Something went wrong..."
+						exit
+				fi
+		else
+				echo "This script does not support your automatic installation of yad on your distribution"
+				echo "However you can install yad manualy and run again this script"
+				exit
+		fi
   fi
 }
-
 # adds a student by using 2 gui prompts, entering them into an array and
 # echoing it into a file
 add_student (){
@@ -88,7 +120,7 @@ add_student (){
     --title="Add new profile" \
     --text="Enter name of new student:" \
     --entry-text "NewStudent")
-  until [[ $name =~ ^[a-Z]{,9}$ ]] ;do
+  until [[ $name =~ ^[a-z][A-Z]{,9}$ ]] ;do
     name=$(yad --entry \
     --title="Add new profile" \
     --text="Name is too long or containes invalid characters, Enter name of new student:" \
@@ -392,5 +424,5 @@ mainmenu(){
 	      esac
 }
 
-
+yad_validation
 mainmenu
