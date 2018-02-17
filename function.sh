@@ -15,7 +15,7 @@ Root_Check(){
 	fi
 }
 
-# check if distro is manjaro by checking the file os-release
+
 Arch_Distribution_Check (){
 	cat /etc/*-release |grep ID |cut -d "=" -f "2" |grep -e ^manjaro$ -e ^arch$ &> /dev/null
 	if [[ $? -eq 0 ]] ;then
@@ -45,6 +45,8 @@ RedHat_Distribution_Check (){
 
 yad_validation (){
 	line=\#\#\#\#\#\#\#\#\#\#
+	line2=\@\@\@\@\@\@\@\@\@\@
+	line3=\!\!\!\!\!\!\!\!\!\!
 	Arch_Distribution_Check
 	Debian_Distribution_Check
 	RedHat_Distribution_Check
@@ -57,27 +59,27 @@ yad_validation (){
 			echo "$line Please enter password to install yad $line"
 			sudo pacman -S yad --noconfirm &> /dev/null
 			if [[ $? -eq 0 ]] ;then
-				echo "Yad installation complete"
+				echo "$line2 Yad installation complete $line2"
 			else
-				echo "Something went wrong..."
+				echo "$line3 Something went wrong $line3"
 				exit
 			fi
 		elif [[ $Distro_Validation =~ "debian" ]] ;then
 				echo "$line Please enter password to install yad $line"
 				sudo apt-get install yad -y &> /dev/null
 				if [[ $? -eq 0 ]] ;then
-					echo "Yad installation complete"
+					echo "$line2 Yad installation complete $line2"
 				else
-					echo "Something went wrong..."
+					echo "$line3 Something went wrong $line3"
 					exit
 				fi
 		elif [[ $Distro_Validation =~ "redhat" ]] ;then
 				echo "$line Please enter password to install yad $line"
 				sudo yum install yad -y &> /dev/null
 				if [[ $? -eq 0 ]] ;then
-						echo "Yad installation complete"
+						echo "$line2 Yad installation complete $line2"
 				else
-						echo "Something went wrong..."
+						echo "$line3 Something went wrong $line3"
 						exit
 				fi
 		else
@@ -87,6 +89,8 @@ yad_validation (){
 		fi
   fi
 }
+
+
 # adds a student by using 2 gui prompts, entering them into an array and
 # echoing it into a file
 add_student (){
@@ -423,6 +427,3 @@ mainmenu(){
 		       ;;
 	      esac
 }
-
-yad_validation
-mainmenu
