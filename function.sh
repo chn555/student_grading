@@ -338,6 +338,7 @@ Sub_Menu_Student_Avarage (){
 student_mavg (){
   files=$HOME/students/*.student
   mavrg=0
+	tmpsum=0
   mavrgstudent="no one"
   for f in $files; do
     read -a sarr < $f
