@@ -366,6 +366,7 @@ student_mavg (){
     fi
   done
   #echo "The best student was ${sarr[1]} with $mavrg points avarage"
+	read -a sarr < $mavrgstudent
   zenity --info \
   --text="The best student was ${sarr[1]} with $mavrg points avarage" --width=450 --height=0
 }
