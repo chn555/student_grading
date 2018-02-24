@@ -31,12 +31,16 @@ move into the directory and give main.sh permissions
 cd student_grading
 chmod +x main.sh
 ```
+run main.sh and use the menu
 
+```
+./main.sh
+```
 
 ### TODO
-1. split the whole thing into 2 files, one that containes all the functions and one that runs them.
-2. check everything for faults
-3. auto-download yad, and verify it exists
+1. split the whole thing into 2 files, one that containes all the functions and one that runs them. DONE
+2. check everything for faults DONE 
+3. auto-download zenity, and verify it exists DONE
 
 
 ## License
