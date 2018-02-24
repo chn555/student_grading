@@ -178,8 +178,7 @@ Sub_Menu_Add_Grade (){
     echo ${arr[0]}
     names+=(${arr[0]})
   done
-  while student=$(zenity --list --separator='' --text="Please select action" --column "Action" $(echo ${names[*]}) \
-  --width=450 --height=350 --print--all); do
+  while student=$(zenity --list --separator='' --text="Please select action" --column "Action" $(echo ${names[*]})); do
     case $student in
       *)
         add_grade
