@@ -39,6 +39,9 @@ chmod +x main.sh
 3. auto-download yad, and verify it exists
 
 
+## License
+
+This project is licensed under the GPL-3.0 License - see the [LICENSE.md](LICENSE.md) file for details
 
 
 ##
