@@ -25,7 +25,7 @@ clone the master branch
 git clone https://github.com/chn555/student_grading
 ```
 
-move into the directory and give main.sh permissions 
+move into the directory and give main.sh permissions
 
 ```
 cd student_grading
@@ -35,7 +35,7 @@ chmod +x main.sh
 
 ### TODO
 1. split the whole thing into 2 files, one that containes all the functions and one that runs them.
-2. check everything for faults 
+2. check everything for faults
 3. auto-download yad, and verify it exists
 
 
@@ -54,4 +54,4 @@ chmod +x main.sh
 ## Acknowledgments
 
 thanks to br0k3ngl255 for mentoring the project
-
+0
