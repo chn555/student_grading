@@ -54,4 +54,3 @@ chmod +x main.sh
 ## Acknowledgments
 
 thanks to br0k3ngl255 for mentoring the project
-0
