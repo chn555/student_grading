@@ -18,7 +18,7 @@ Root_Check(){
 
 ## Checks if the user has pacman installer by running the "command" command on "pacman" and examining the exit code to check if the installer exists
 Pacman_Check (){
-	command pacman &> /dev/null
+	command -v pacman &> /dev/null
 	if [[ $? -eq 0 ]] ;then
 		Installer_Validation="PacManINST"
 	else
@@ -28,7 +28,7 @@ Pacman_Check (){
 
 ## Checks if the user has apt-get installer by running the "command" command on "apt-get" and examining the exit code to check if the installer exists
 Apt-Get_Check (){
-	command apt-get &> /dev/null
+	command -v apt-get &> /dev/null
 	if [[ $? -eq 0	]] ;then
 		Installer_Validation="AptGetINST"
 	else
@@ -38,7 +38,7 @@ Apt-Get_Check (){
 
 ## Checks if the user has yum installer by running the "command" command on "yum" and examining the exit code to check if the installer exists
 Yum_Check (){
-	command yum &> /dev/null
+	command -v yum &> /dev/null
 	if [[ $? -eq 0	]] ;then
 		Installer_Validation="YumINST"
 	else
@@ -48,7 +48,7 @@ Yum_Check (){
 
 ## Checks if the user has dnf installer by running the "command" command on "dnf" and examining the exit code to check if the installer exists
 Dnf_Check (){
-	command dnf &> /dev/null
+	command -v dnf &> /dev/null
 	if [[ $? -eq 0	]] ;then
 		Installer_Validation="DnfINST"
 	else
@@ -101,7 +101,7 @@ zenity_validation (){
 				fi
 		elif [[ $Installer_Validation =~ "DnfINST" ]] ;then
 				echo "$line Please enter password to install zenity $line"
-				sudo yum install zenity -y &> /dev/null
+				sudo dnf install zenity -y &> /dev/null
 				if [[ $? -eq 0 ]] ;then
 						echo "$line zenity installation complete $line"
 				else
