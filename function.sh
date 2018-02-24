@@ -1,8 +1,8 @@
 #!/bin/bash
 
-#Creator : fuck a you DorShamay && BigRush && Yahav && Chn555
+#Creator : DorShamay && BigRush && Yahav && Chn555
 #Purpose : all functions
-#Version 0.0.1 12/02/18
+#Version 1 24/02/18
 
 
 # checkif user is root by UID
