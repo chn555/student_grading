@@ -344,6 +344,7 @@ student_mavg (){
   for f in $files; do
     read -a sarr < $f
     maxcount=${#sarr[*]}
+		tmpsum=0
     tmpmavg=0
     if [[ $maxcount -le 2 ]]; then
       :
