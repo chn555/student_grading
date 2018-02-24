@@ -323,8 +323,7 @@ Sub_Menu_Student_Avarage (){
     echo ${arr[0]}
     names+=(${arr[0]})
   done
-  while student=$(zenity --list --separator='' --text="Please select action" --column "Action" $(echo ${names[*]}) \
-  --width=450); do
+  while student=$(zenity --list --separator='' --text="Please select action" --column "Action" $(echo ${names[*]})); do
     case $student in
       *)
         student_avg
