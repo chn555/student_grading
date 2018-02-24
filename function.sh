@@ -290,6 +290,7 @@ Sub_Menu_Replace_Student (){
 
 # calculates a student avg by adding all the grades and then deviding by the number of grades
 student_avg (){
+	sum=0
   # opens the file into an array called sarr
   # read -a sarr < $id
   read -a  sarr < "$HOME/students/$student.student"
