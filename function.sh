@@ -102,6 +102,9 @@ add_student (){
     --title="Add new profile" \
     --text="Enter ID of new student:" \
     --entry-text "NewStudent")
+		if [[ $? == 1 ]] ; then
+			return 1
+		fi
   until [[ $sid =~ ^[0-9]{1,9}$ ]] ;do
     sid=$(zenity --entry \
     --title="Add new profile" \
@@ -109,6 +112,8 @@ add_student (){
     --entry-text "NewStudent")
     if [[ $sid == "NewStudent" ]]; then
       return
+		elif [[ $? == 1 ]] ; then
+			return 1
     else
       :
     fi
@@ -122,6 +127,9 @@ add_student (){
     --title="Add new profile" \
     --text="Enter name of new student:" \
     --entry-text "NewStudent")
+		if [[ $? == 1 ]] ; then
+			return 1
+		fi
   until [[ $name =~ ^[a-Z]{1,9}$ ]] ;do
     name=$(zenity --entry \
     --title="Add new profile" \
@@ -129,6 +137,8 @@ add_student (){
     --entry-text "NewStudent")
     if [[ $name == "NewStudent" ]]; then
       return
+		elif [[ $? == 1 ]] ; then
+			return 1
     else
       :
     fi
