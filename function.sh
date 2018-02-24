@@ -199,7 +199,7 @@ Sub_Menu_Remove_Student(){
     names+=(${arr[0]})
   done
   while Student_To_Remove=$(zenity --list --separator='' --text="Please select action" --column "Action" $(echo ${names[*]}) \
-  --width=450 --height=350 --print--all); do
+  --width=450); do
     case $Student_To_Remove in
       *)
         remove_student
