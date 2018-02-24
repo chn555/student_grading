@@ -266,6 +266,9 @@ Sub_Menu_Replace_Student (){
     names+=(${arr[0]})
   done
   while student1=$(zenity --list --text="Please select student 1" --column "Action" $(echo ${names[*]}) ); do
+		if [[ $? -eq 1 ]] ;then
+			return 1
+		fi
     case $student1 in
       *)
         student_one=$student1.student
@@ -273,7 +276,7 @@ Sub_Menu_Replace_Student (){
         ;;
     esac
   done
-  while student2=$(zenity --list --separator='' --text="Please select student 2" --column "Action" $(echo ${names[*]}) ); do
+  while student2=$(zenity --list --text="Please select student 2" --column "Action" $(echo ${names[*]}) ); do
     case $student2 in
           *)
             student_two=$student2.student
