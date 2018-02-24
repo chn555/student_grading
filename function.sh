@@ -210,7 +210,7 @@ Sub_Menu_Remove_Student(){
 
 # removes students by deleting the file
 remove_student (){
-  answer=$(zenity --list --seperator='' --text="Are you sure you \
+  answer=$(zenity --list --text="Are you sure you \
   want to remove $Student_To_Remove ?"\
   --column "Action" "Yes" "No" )
   if [[ $answer =~ y|Y|"YES"|"Yes|" ]] ;then
