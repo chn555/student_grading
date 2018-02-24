@@ -13,7 +13,7 @@ What things you need to install the software and how to install them
 ```
 NONE
 ```
-for the zenity branch, yad is required
+for the zenity branch, zenity will be installed
 
 ### Installing
 
