@@ -2,7 +2,7 @@
 
 #Creator : DorShamay && BigRush && Yahav && Chn555
 #Purpose : all functions
-#Version 1 12/02/18
+#Version 1 24/02/18
 
 
 # checkif user is root by UID
